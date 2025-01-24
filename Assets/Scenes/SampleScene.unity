@@ -355,81 +355,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 872934170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &365533567
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 365533568}
-  - component: {fileID: 365533570}
-  - component: {fileID: 365533569}
-  m_Layer: 5
-  m_Name: Fill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &365533568
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365533567}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1652031664}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &365533569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365533567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.6226415, g: 0.54544526, b: 0.07929868, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &365533570
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365533567}
-  m_CullTransparentMesh: 1
 --- !u!1 &397714827
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +869,7 @@ GameObject:
   - component: {fileID: 872934174}
   - component: {fileID: 872934175}
   m_Layer: 0
-  m_Name: Ship
+  m_Name: Ship (Player)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1138,7 +1063,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  healthBar: {fileID: 1652031665}
+  healthSprites:
+  - {fileID: -306591129, guid: a423f9194a173ec4e9af1f71f7caf5b5, type: 3}
+  - {fileID: -2109147852, guid: a423f9194a173ec4e9af1f71f7caf5b5, type: 3}
+  - {fileID: -233910253, guid: a423f9194a173ec4e9af1f71f7caf5b5, type: 3}
+  - {fileID: 1761203336, guid: a423f9194a173ec4e9af1f71f7caf5b5, type: 3}
+  - {fileID: 557144454, guid: a423f9194a173ec4e9af1f71f7caf5b5, type: 3}
+  uiHealthImage: {fileID: 1205960181}
+  shipRenderer: {fileID: 872934169}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,7 +1175,7 @@ GameObject:
   - component: {fileID: 1205960182}
   - component: {fileID: 1205960181}
   m_Layer: 5
-  m_Name: Border
+  m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1256,17 +1188,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205960179}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.0946712, y: 0.6388679, z: 1.4311609}
+  m_LocalScale: {x: 1.3094, y: 1.3094, z: 1.3094}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1652031664}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 292.33435, y: 15.290885}
-  m_SizeDelta: {x: 18, y: 908.7365}
+  m_AnchoredPosition: {x: -0.8, y: -1.9836}
+  m_SizeDelta: {x: 131.25, y: 21.875}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1205960181
 MonoBehaviour:
@@ -1288,7 +1220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2622490616300698636, guid: d5429eb211763cb44bdd3f6e5238823b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1916,16 +1848,15 @@ RectTransform:
   m_GameObject: {fileID: 1652031663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3728513, y: 0.3163371, z: 0.5072735}
+  m_LocalScale: {x: 1.2100573, y: 1.0266452, z: 1.646313}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 365533568}
   - {fileID: 1205960180}
   m_Father: {fileID: 675481132}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.54725, y: -188.5}
+  m_AnchoredPosition: {x: -0.54725, y: -178.44}
   m_SizeDelta: {x: 516.36, y: 30.5818}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1652031665
@@ -1982,7 +1913,7 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 0}
-  m_FillRect: {fileID: 365533568}
+  m_FillRect: {fileID: 0}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
@@ -2278,7 +2209,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 50
+  m_SortingOrder: 49
   m_Sprite: {fileID: 21300000, guid: 7b7b2c59f8d929a4fa3f9382b2a90414, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2294,6 +2225,7 @@ SpriteRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 142312156}
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 1946529754}
@@ -2302,4 +2234,3 @@ SceneRoots:
   - {fileID: 1595964150}
   - {fileID: 1259817429}
   - {fileID: 675481132}
-  - {fileID: 142312156}
