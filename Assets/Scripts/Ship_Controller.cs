@@ -6,6 +6,7 @@ public class Ship_Controller : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float acceleration = 10f;
     [SerializeField] private float deceleration = 10f;
+    [SerializeField] private float rotationSpeed = 100f;
 
     private Vector2 movement;
     private Rigidbody2D rb;
@@ -19,8 +20,15 @@ public class Ship_Controller : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-
         movement = new Vector2(horizontalInput, verticalInput).normalized;
+
+        // Rotation input
+        float rotationInput = 0f;
+        if (Input.GetKey(KeyCode.E)) rotationInput = -1f; // Positive Z rotation
+        if (Input.GetKey(KeyCode.Q)) rotationInput = 1f;  // Negative Z rotation
+
+        // Apply rotation
+        transform.Rotate(Vector3.forward * rotationInput * rotationSpeed * Time.deltaTime);
     }
 
     void FixedUpdate()
