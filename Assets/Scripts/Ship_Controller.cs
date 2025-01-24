@@ -24,8 +24,8 @@ public class Ship_Controller : MonoBehaviour
 
         // Rotation input
         float rotationInput = 0f;
-        if (Input.GetKey(KeyCode.E)) rotationInput = -1f; // Positive Z rotation
-        if (Input.GetKey(KeyCode.Q)) rotationInput = 1f;  // Negative Z rotation
+        if (Input.GetKey(KeyCode.E)) rotationInput = -1f; 
+        if (Input.GetKey(KeyCode.Q)) rotationInput = 1f;  
 
         // Apply rotation
         transform.Rotate(Vector3.forward * rotationInput * rotationSpeed * Time.deltaTime);
