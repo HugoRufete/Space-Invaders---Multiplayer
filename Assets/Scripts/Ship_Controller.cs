@@ -14,6 +14,7 @@ public class Ship_Controller : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.freezeRotation = true; // Evita que las colisiones modifiquen la rotación
     }
 
     void Update()
@@ -22,12 +23,11 @@ public class Ship_Controller : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         movement = new Vector2(horizontalInput, verticalInput).normalized;
 
-        // Rotation input
+        // Rotación basada en la entrada del jugador
         float rotationInput = 0f;
-        if (Input.GetKey(KeyCode.E)) rotationInput = -1f; 
-        if (Input.GetKey(KeyCode.Q)) rotationInput = 1f;  
+        if (Input.GetKey(KeyCode.E)) rotationInput = -1f;
+        if (Input.GetKey(KeyCode.Q)) rotationInput = 1f;
 
-        // Apply rotation
         transform.Rotate(Vector3.forward * rotationInput * rotationSpeed * Time.deltaTime);
     }
 

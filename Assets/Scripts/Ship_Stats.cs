@@ -9,10 +9,12 @@ public class Ship_Stats : MonoBehaviour
     public int currentHealth;
     public Sprite[] healthSprites;
     public Image uiHealthImage;
-    public SpriteRenderer shipRenderer; // Reference to the ship's sprite renderer
+    private SpriteRenderer shipRenderer;
 
     void Start()
     {
+        shipRenderer = GetComponent<SpriteRenderer>();
+
         currentHealth = maxHealth;
         UpdateSprite();
     }
@@ -21,7 +23,7 @@ public class Ship_Stats : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            print("Player Dead");
+            Destroy(gameObject);
         }
     }
 
@@ -38,19 +40,15 @@ public class Ship_Stats : MonoBehaviour
         currentHealth -= damage;
         UpdateSprite();
 
-        // Start coroutine to flash red
         StartCoroutine(FlashRed());
     }
 
     IEnumerator FlashRed()
     {
-        // Change color to red
         shipRenderer.color = Color.red;
 
-        // Wait for 1 second
         yield return new WaitForSeconds(0.5f);
 
-        // Return to original color
         shipRenderer.color = Color.white;
     }
 

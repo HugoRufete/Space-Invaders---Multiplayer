@@ -31,5 +31,7 @@ public class Enemy_Script : MonoBehaviour
     public void DoDamage(int damage)
     {
         currentHealth = currentHealth - damage;
+
+        print("Enemy Damaged");
     }
 }
