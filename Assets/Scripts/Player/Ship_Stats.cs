@@ -5,18 +5,19 @@ using UnityEngine.UI;
 
 public class Ship_Stats : MonoBehaviour
 {
-    public int maxHealth;
+    public int maxHealth = 100;
     public int currentHealth;
-    public Sprite[] healthSprites;
-    public Image uiHealthImage;
+
+    public Image healthBarFill;
+
     private SpriteRenderer shipRenderer;
 
     void Start()
     {
         shipRenderer = GetComponent<SpriteRenderer>();
-
         currentHealth = maxHealth;
-        UpdateSprite();
+
+        UpdateHealthBar();
     }
 
     void Update()
@@ -29,18 +30,36 @@ public class Ship_Stats : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") || collision.CompareTag("Enemy_Projectile"))
+        if (collision.CompareTag("Enemy"))
         {
             Damage(20);
+        }
+        else if (collision.CompareTag("Enemy_Projectile"))
+        {
+            Damage(10);
         }
     }
 
     public void Damage(int damage)
     {
         currentHealth -= damage;
-        UpdateSprite();
+
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+
+        UpdateHealthBar();
 
         StartCoroutine(FlashRed());
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBarFill != null)
+        {
+            healthBarFill.fillAmount = (float)currentHealth / maxHealth;
+        }
     }
 
     IEnumerator FlashRed()
@@ -50,17 +69,5 @@ public class Ship_Stats : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         shipRenderer.color = Color.white;
-    }
-
-    void UpdateSprite()
-    {
-        float healthPercentage = (float)currentHealth / maxHealth;
-
-        int spriteIndex = Mathf.Clamp(healthSprites.Length - 1 - Mathf.FloorToInt(healthPercentage * healthSprites.Length), 0, healthSprites.Length - 1);
-
-        if (uiHealthImage != null)
-        {
-            uiHealthImage.sprite = healthSprites[spriteIndex];
-        }
     }
 }
