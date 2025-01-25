@@ -29,13 +29,9 @@ public class Ship_Stats : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Enemy_Projectile"))
         {
             Damage(20);
-        }
-        else if(collision.CompareTag("Enemy_Projectile"))
-        {
-            Damage(10);
         }
     }
 
