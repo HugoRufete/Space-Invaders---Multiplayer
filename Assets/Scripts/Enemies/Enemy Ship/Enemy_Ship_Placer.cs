@@ -1,16 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Enemy_Ship_Placer : MonoBehaviour
 {
-    public GameObject shipPrefab; // Prefab de la nave enemiga
-    public GameObject shipPreviewPrefab; // Prefab para la visualización previa
-    public string placementAreaTag = "PlacementArea"; // Tag para identificar las áreas válidas
-    public LayerMask placementLayer; // Capa para las áreas de colocación (opcional)
+    public GameObject shipPrefab;
+    public GameObject shipPreviewPrefab;
+    public string placementAreaTag = "PlacementArea";
+    public LayerMask placementLayer;
 
-    private GameObject previewInstance; // Instancia actual de la visualización previa
-    private bool isInsidePlacementArea = false; // Verifica si el ratón está dentro de un área válida
+    private GameObject previewInstance;
+    private bool isInsidePlacementArea = false;
+
+    // Cooldown variables
+    public int maxShips = 3;
+    public float cooldownTime = 5f;
+    private int placedShips = 0;
+    private bool isCooldown = false;
+    public int shipsRemaining;
+
+    // UI Variable for cooldown feedback
+    public Image cooldownFillImage;
+    public TMP_Text shipsRemaining_Text;
+
+    private void Start()
+    {
+        shipsRemaining = maxShips;
+
+        if (cooldownFillImage != null)
+        {
+            cooldownFillImage.fillAmount = 1;
+        }
+    }
 
     void Update()
     {
@@ -18,7 +41,7 @@ public class Enemy_Ship_Placer : MonoBehaviour
 
         Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition, placementLayer);
 
-        if (hitCollider != null && hitCollider.CompareTag(placementAreaTag))
+        if (hitCollider != null && hitCollider.CompareTag(placementAreaTag) && !isCooldown)
         {
             if (!isInsidePlacementArea)
             {
@@ -28,11 +51,9 @@ public class Enemy_Ship_Placer : MonoBehaviour
 
             if (previewInstance != null)
             {
-                // Actualizar la posición de la preview mientras el ratón se mueve
                 previewInstance.transform.position = mousePosition;
             }
 
-            // Colocar la nave enemiga al hacer clic con el botón central del ratón
             if (Input.GetMouseButtonDown(2))
             {
                 PlaceShip(mousePosition);
@@ -50,13 +71,11 @@ public class Enemy_Ship_Placer : MonoBehaviour
 
     private void ShowPreview(Vector2 position)
     {
-        // Instanciar el prefab de preview y conservar su rotación original
         previewInstance = Instantiate(shipPreviewPrefab, position, shipPreviewPrefab.transform.rotation);
     }
 
     private void HidePreview()
     {
-        // Destruir el prefab de preview si existe
         if (previewInstance != null)
         {
             Destroy(previewInstance);
@@ -65,11 +84,56 @@ public class Enemy_Ship_Placer : MonoBehaviour
 
     private void PlaceShip(Vector2 position)
     {
-        // Instanciar la nave enemiga y conservar su rotación original
-        Instantiate(shipPrefab, position, shipPrefab.transform.rotation);
-        Debug.Log("Nave colocada en: " + position);
+        if (placedShips < maxShips)
+        {
+            Instantiate(shipPrefab, position, shipPrefab.transform.rotation);
+            Debug.Log("Nave colocada en: " + position);
 
-        // Ocultar la preview después de colocar la nave
-        HidePreview();
+            placedShips++;
+            shipsRemaining--;
+
+            if (placedShips >= maxShips)
+            {
+                StartCoroutine(CooldownRoutine());
+            }
+
+            HidePreview();
+        }
+    }
+
+    private IEnumerator CooldownRoutine()
+    {
+        isCooldown = true;
+
+        if (cooldownFillImage != null)
+        {
+            cooldownFillImage.fillAmount = 0;
+        }
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < cooldownTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            if (cooldownFillImage != null)
+            {
+                cooldownFillImage.fillAmount = Mathf.Clamp01(elapsedTime / cooldownTime);
+            }
+
+            yield return null;
+        }
+
+        shipsRemaining = maxShips;
+        placedShips = 0;
+        isCooldown = false;
+
+        if (cooldownFillImage != null)
+        {
+            // Ensure the fill is full after the cooldown
+            cooldownFillImage.fillAmount = 1;
+        }
+
+        Debug.Log("Cooldown terminado. Puedes colocar más naves.");
     }
 }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine.UI; // Necesario para manipular la imagen tipo fill
 
 public class TurretPlacer : MonoBehaviour
 {
@@ -11,11 +13,30 @@ public class TurretPlacer : MonoBehaviour
     private GameObject previewInstance;
     private bool isInsidePlacementArea = false;
 
-    private int turretCount = 0; 
-    private bool isCooldown = false; 
+    public int maxTurrets = 3;
+    public int turretsRemaining = 3;
+    public int cooldownTime = 5;
+    private int turretCount = 0;
+    private bool isCooldown = false;
+
+    // UI Variables
+    public TMP_Text turretsRemaining_Text;
+    public Image cooldownFillImage; 
+
+    private void Start()
+    {
+        turretsRemaining = maxTurrets;
+
+        if (cooldownFillImage != null)
+        {
+            cooldownFillImage.fillAmount = 1;
+        }
+    }
 
     void Update()
     {
+        turretsRemaining_Text.text = turretsRemaining.ToString();
+
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition, placementLayer);
@@ -63,15 +84,16 @@ public class TurretPlacer : MonoBehaviour
 
     private void PlaceTurret(Vector2 position)
     {
-        if (turretCount < 3)
+        if (turretCount < maxTurrets)
         {
             Instantiate(turretPrefab, position, Quaternion.identity);
             Debug.Log("Torreta colocada en: " + position);
 
+            turretsRemaining--;
             turretCount++;
             HidePreview();
 
-            if (turretCount >= 3)
+            if (turretCount >= maxTurrets)
             {
                 StartCoroutine(StartCooldown());
             }
@@ -82,11 +104,28 @@ public class TurretPlacer : MonoBehaviour
     {
         isCooldown = true;
         Debug.Log("Enfriamiento iniciado...");
+        turretCount = 0;
 
-        yield return new WaitForSeconds(5f); 
+        if (cooldownFillImage != null)
+        {
+            cooldownFillImage.fillAmount = 0;
+        }
 
-        turretCount = 0; 
+        float elapsedTime = 0;
+
+        while (elapsedTime < cooldownTime)
+        {
+            elapsedTime += Time.deltaTime;
+            if (cooldownFillImage != null)
+            {
+                cooldownFillImage.fillAmount = Mathf.Clamp01(elapsedTime / cooldownTime);
+            }
+            yield return null;
+        }
+
+        turretsRemaining = maxTurrets;
         isCooldown = false;
+
         Debug.Log("Enfriamiento terminado. Se pueden colocar más torretas.");
     }
 }
