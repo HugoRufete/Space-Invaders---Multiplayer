@@ -4,22 +4,39 @@ using UnityEngine;
 
 public class Alien_Instantiator : MonoBehaviour
 {
-    public GameObject alienPrefab; // Prefab to instantiate
-    public List<Transform> spawnPoints; // List of possible spawn locations
+    public GameObject alienPrefab;
+    public List<Transform> spawnPoints;
+
+    private int rightClickCount = 0;
+    public float cooldownTime = 3f;
+    private float lastSpawnTime;
+    private bool cooldownActive = false;
 
     void Update()
     {
-        // Check for right mouse button click
-        if (Input.GetMouseButtonDown(1)) // 1 represents right mouse button
+        if (Input.GetMouseButtonDown(1))
         {
-            // Ensure prefab and spawn points are set
-            if (alienPrefab != null && spawnPoints.Count > 0)
+            if (!cooldownActive || rightClickCount < 3)
             {
-                // Select random spawn point from list
-                Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+                if (alienPrefab != null && spawnPoints.Count > 0)
+                {
+                    Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+                    Instantiate(alienPrefab, randomSpawnPoint.position, Quaternion.identity);
 
-                // Instantiate prefab at selected spawn point
-                Instantiate(alienPrefab, randomSpawnPoint.position, Quaternion.identity);
+                    rightClickCount++;
+
+                    if (rightClickCount >= 3)
+                    {
+                        cooldownActive = true;
+                        lastSpawnTime = Time.time;
+                    }
+                }
+            }
+
+            if (cooldownActive && Time.time >= lastSpawnTime + cooldownTime)
+            {
+                cooldownActive = false;
+                rightClickCount = 0;
             }
         }
     }
