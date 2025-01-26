@@ -9,14 +9,18 @@ public class Turret_Shooting : MonoBehaviour
     public Transform leftFirePoint;
     public Transform rightFirePoint;
 
+    private Audio_Manager audioManager;
     void Start()
     {
+        audioManager = FindAnyObjectByType<Audio_Manager>();
         animator = GetComponent<Animator>();
         Invoke("Shoot", 1f);
     }
 
     void Shoot()
     {
+        audioManager.TurretShooting();
+
         if (projectilePrefab != null)
         {
             animator.SetTrigger("isShooting");

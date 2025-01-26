@@ -21,6 +21,8 @@ public class Alien_Instantiator : MonoBehaviour
     public Image cooldownFillImage;
     public TMP_Text alienRemaining_Text;
 
+    public Audio_Manager audioManager;
+
     private void Start()
     {
         alienRemaining = maxAlienCount;
@@ -42,6 +44,7 @@ public class Alien_Instantiator : MonoBehaviour
             {
                 if (alienPrefab != null && spawnPoints.Count > 0)
                 {
+                    audioManager.AlienSpawned();
                     Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
                     Instantiate(alienPrefab, randomSpawnPoint.position, Quaternion.identity);
 

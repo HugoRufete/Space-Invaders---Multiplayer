@@ -25,8 +25,11 @@ public class Enemy_Ship_Placer : MonoBehaviour
     public Image cooldownFillImage;
     public TMP_Text shipsRemaining_Text;
 
+    private Audio_Manager audioManager;
     private void Start()
     {
+        audioManager = FindAnyObjectByType<Audio_Manager>();
+
         shipsRemaining = maxShips;
 
         if (cooldownFillImage != null)
@@ -86,6 +89,8 @@ public class Enemy_Ship_Placer : MonoBehaviour
 
     private void PlaceShip(Vector2 position)
     {
+        audioManager.ShipSpawned();
+
         if (placedShips < maxShips)
         {
             Instantiate(shipPrefab, position, shipPrefab.transform.rotation);

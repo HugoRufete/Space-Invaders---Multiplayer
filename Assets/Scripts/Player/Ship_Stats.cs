@@ -18,6 +18,7 @@ public class Ship_Stats : MonoBehaviour
 
     public UnityEvent onGameOver;
 
+    public Audio_Manager audioManager;
     void Start()
     {
         shipRenderer = GetComponent<SpriteRenderer>();
@@ -30,6 +31,7 @@ public class Ship_Stats : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            audioManager.GameOver();
             onGameOver.Invoke();
             gameOverObject.SetActive(true);
             Destroy(gameObject);

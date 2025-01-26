@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 20
+  lifetime: 7
 --- !u!114 &7191022992986052577
 MonoBehaviour:
   m_ObjectHideFlags: 0

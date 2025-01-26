@@ -10,6 +10,8 @@ public class Ship_Shotting : MonoBehaviour
     [SerializeField] private float fireRate = 0.5f; 
     private float nextFireTime = 0f;
 
+    public Audio_Manager audioManager;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= nextFireTime)
@@ -21,6 +23,8 @@ public class Ship_Shotting : MonoBehaviour
 
     void Shoot()
     {
+        audioManager.ShipShooting();
+
         if (leftFirePoint == null || rightFirePoint == null || projectilePrefab == null)
         {
             Debug.LogWarning("Shooting references are not set properly!");
