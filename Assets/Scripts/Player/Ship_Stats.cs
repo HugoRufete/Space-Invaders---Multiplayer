@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Ship_Stats : MonoBehaviour
@@ -11,6 +13,10 @@ public class Ship_Stats : MonoBehaviour
     public Image healthBarFill;
 
     private SpriteRenderer shipRenderer;
+
+    public GameObject gameOverObject;
+
+    public UnityEvent onGameOver;
 
     void Start()
     {
@@ -24,6 +30,8 @@ public class Ship_Stats : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            onGameOver.Invoke();
+            gameOverObject.SetActive(true);
             Destroy(gameObject);
         }
     }
@@ -69,5 +77,11 @@ public class Ship_Stats : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         shipRenderer.color = Color.white;
+    }
+
+    public void ReloadScene()
+    {
+        print("recargando escena");
+        SceneManager.LoadScene("SampleScene");
     }
 }

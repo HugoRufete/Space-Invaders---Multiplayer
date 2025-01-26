@@ -37,6 +37,8 @@ public class Enemy_Ship_Placer : MonoBehaviour
 
     void Update()
     {
+        shipsRemaining_Text.text = shipsRemaining.ToString();
+
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Collider2D hitCollider = Physics2D.OverlapPoint(mousePosition, placementLayer);
