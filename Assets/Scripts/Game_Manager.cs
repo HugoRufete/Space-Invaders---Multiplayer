@@ -56,7 +56,7 @@ public class Game_Manager : MonoBehaviour
 
     public void ReloadScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Main");
     }
 
     public void CallReloadCoroutine()
@@ -67,7 +67,7 @@ public class Game_Manager : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f);
 
-        SceneManager.LoadScene("SampleScene");
+        ReloadScene();
     }
 
     public void StartGame()
