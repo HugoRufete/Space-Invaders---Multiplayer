@@ -11,9 +11,21 @@ public class Game_Manager : MonoBehaviour
 
     public GameObject youWin_Text;
 
+    public Alien_Instantiator alien_Instantiator;
+    public TurretPlacer turretPlacer;
+    public Enemy_Ship_Placer enemy_Ship_Placer;
+    public Ship_Shotting ship_Shotting;
+    public Ship_Controller ship_Controller;
     private void Start()
     {
         youWin_Text.SetActive(false);
+
+        //Desactivar Código
+        alien_Instantiator.enabled = false;
+        turretPlacer.enabled = false;
+        enemy_Ship_Placer.enabled = false;
+        ship_Shotting.enabled = false;
+        ship_Controller.enabled = false;
     }
 
     void Update()
@@ -56,5 +68,14 @@ public class Game_Manager : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         SceneManager.LoadScene("SampleScene");
+    }
+
+    public void StartGame()
+    {
+        alien_Instantiator.enabled = true;
+        turretPlacer.enabled = true;
+        enemy_Ship_Placer.enabled = true;
+        ship_Shotting.enabled = true;
+        ship_Controller.enabled = true;
     }
 }

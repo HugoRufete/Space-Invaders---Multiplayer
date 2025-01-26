@@ -952,6 +952,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &344145948 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8026658739534357403, guid: d78611e709c366b469f4cad089387eea, type: 3}
+  m_PrefabInstance: {fileID: 6854703118585964706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 278d62c472560ba4b814deaa0b6171e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &344145949 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2122466817540654748, guid: d78611e709c366b469f4cad089387eea, type: 3}
+  m_PrefabInstance: {fileID: 6854703118585964706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cbc17ac19d937643ae5d9f17eb181fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &365394973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,6 +1691,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1772025585}
+        m_TargetAssemblyTypeName: Game_Manager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5107,6 +5141,11 @@ MonoBehaviour:
   timerText: {fileID: 2008677164}
   timeRemaining: 30
   youWin_Text: {fileID: 940012831}
+  alien_Instantiator: {fileID: 686147852}
+  turretPlacer: {fileID: 686147854}
+  enemy_Ship_Placer: {fileID: 686147855}
+  ship_Shotting: {fileID: 344145949}
+  ship_Controller: {fileID: 344145948}
 --- !u!4 &1772025586
 Transform:
   m_ObjectHideFlags: 0
@@ -6377,6 +6416,7 @@ SceneRoots:
   - {fileID: 142312156}
   - {fileID: 963194228}
   - {fileID: 705507995}
+  - {fileID: 1772025586}
   - {fileID: 6854703118585964706}
   - {fileID: 1595964150}
   - {fileID: 1259817429}
@@ -6384,4 +6424,3 @@ SceneRoots:
   - {fileID: 611236459}
   - {fileID: 686147853}
   - {fileID: 1946529754}
-  - {fileID: 1772025586}
