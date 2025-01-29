@@ -4597,7 +4597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 2008677164}
-  timeRemaining: 30
+  timeRemaining: 45
   youWin_Text: {fileID: 940012831}
   alien_Instantiator: {fileID: 686147852}
   turretPlacer: {fileID: 686147854}
